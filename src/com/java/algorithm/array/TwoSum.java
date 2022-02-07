@@ -23,8 +23,9 @@ public class TwoSum {
         int length = nums.length;
         for (int i = 0; i < length - 1; i++){
             for (int j = i + 1; j < length; j++){
-                if(nums[i] + nums[j] == target)
-                return new int[]{i, j};
+                if(nums[i] + nums[j] == target) {
+                    return new int[]{i, j};
+                }
             }
         }
         throw new IllegalArgumentException("no solution");
