@@ -7,6 +7,13 @@ package com.java.algorithm.list;
  */
 public class MergeTwoLists {
 
+    /**
+     * 递归
+     *
+     * @param l1 链表1
+     * @param l2 链表2
+     * @return 合并后链表
+     */
     public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         if (l1 == null) {
             return l2;
@@ -22,6 +29,32 @@ public class MergeTwoLists {
     }
 
     /**
+     * 迭代
+     *
+     * @param l1 链表1
+     * @param l2 链表2
+     * @return 合并后链表
+     */
+    public static ListNode mergeTwoLists2(ListNode l1, ListNode l2) {
+        ListNode preHead = new ListNode(-1);
+
+        ListNode prev = preHead;
+        while (l1 != null && l2 != null) {
+            if (l1.val <= l2.val) {
+                prev.next = l1;
+                l1 = l1.next;
+            } else {
+                prev.next = l2;
+                l2 = l2.next;
+            }
+            prev = prev.next;
+        }
+
+        prev.next = l1 == null ? l2 : l1;
+        return preHead.next;
+    }
+
+    /**
      * [1,2,4]
      * [1,3,4]
      *
@@ -30,10 +63,11 @@ public class MergeTwoLists {
     public static void main(String[] args) {
         ListNode l1 = new ListNode(1, new ListNode(2, new ListNode(4, null)));
         ListNode l2 = new ListNode(1, new ListNode(3, new ListNode(4, null)));
-        ListNode listNode = mergeTwoLists(l1, l2);
-        while (listNode != null){
+        // ListNode listNode = mergeTwoLists(l1, l2);
+        ListNode listNode = mergeTwoLists2(l1, l2);
+        while (listNode != null) {
             System.out.println(listNode.val);
-            listNode =  listNode.next;
+            listNode = listNode.next;
         }
     }
 
